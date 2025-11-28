@@ -1,0 +1,45 @@
+# --- Dependencies (Composer) ---
+/vendor/
+composer.phar
+
+# --- Environment Variables (SECURITY) ---
+# Never commit API keys or passwords to Git
+.env
+.env.local
+.env.*.local
+*.env
+
+# --- Logs and Debugging ---
+*.log
+/logs/
+error_log
+debug.log
+
+# --- Cache and Temporary Files ---
+/cache/
+/tmp/
+.php_cs.cache
+.phpunit.result.cache
+
+# --- IDEs and Editors ---
+# VS Code
+.vscode/
+# PhpStorm / IntelliJ
+.idea/
+*.iml
+# NetBeans
+nbproject/
+# Sublime Text
+*.sublime-project
+*.sublime-workspace
+
+# --- PHPUnit (Testing) ---
+/coverage/
+/build/
+phpunit.xml
+# Keep phpunit.xml.dist if it exists
+
+# --- Operating System ---
+.DS_Store
+Thumbs.db
+Desktop.ini
