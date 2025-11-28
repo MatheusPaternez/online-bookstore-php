@@ -16,7 +16,7 @@ $books = [
 ];
 
 function applyDiscount(&$allbooks){
-    foreach($allbooks as $book){
+    foreach($allbooks as &$book){
         if($book["genre"] == "Science Fiction"){
             $book["price"] = $book["price"] * 0.9;
         }
