@@ -1,3 +1,31 @@
+<?php 
+// I put two initial books
+$books = [
+    [
+        "title" => "Peaky Blinders",
+        "author" => "Tommy Shelby",
+        "genre" => "action",
+        "price" => 20
+    ],
+    [
+        "title" => "Round Six",
+        "author" => "Gi-hun Seong",
+        "genre" => "Science Fiction",
+        "price" => 8
+    ]
+];
+
+function applyDiscount(&$allbooks){
+    foreach($allbooks as $book){
+        if($book["genre"] == "Science Fiction"){
+            $book["price"] = $book["price"] * 0.9;
+        }
+    }
+}
+applyDiscount($books);
+print_r($books[1]['price']);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
