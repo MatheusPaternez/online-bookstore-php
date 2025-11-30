@@ -39,9 +39,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     print_r($books);
 
     // Logic for checking if array has something
-    if (!empty($books)) {
-        foreach ($books as $book) {
-            
+    function showBooks($books){
+        if (!empty($books)) {
+            foreach ($books as $book) {
+                echo     "<tr>
+      <td style='padding:8px; border-bottom:1px solid #eee;'>{$book['title']}</td>
+      <td style='padding:8px; border-bottom:1px solid #eee;'>{$book['author']}</td>
+      <td style='padding:8px; border-bottom:1px solid #eee;'>{$book['genre']}</td>
+      <td style='padding:8px; border-bottom:1px solid #eee; text-align:right;'>\${$book['price']}</td>
+    </tr>";
+            }
         }
     }
 
@@ -99,15 +106,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </tr>
         </thead>
         <tbody>
-            <!-- Insert one <tr> per book -->
-            <!-- Example:
-    <tr>
-      <td style="padding:8px; border-bottom:1px solid #eee;">Round Six</td>
-      <td style="padding:8px; border-bottom:1px solid #eee;">Gi-hun Seong</td>
-      <td style="padding:8px; border-bottom:1px solid #eee;">Science Fiction</td>
-      <td style="padding:8px; border-bottom:1px solid #eee; text-align:right;">$8.00</td>
-    </tr>
-    -->
+            <?php 
+                showBooks($books);
+            ?>
         </tbody>
     </table>
 
