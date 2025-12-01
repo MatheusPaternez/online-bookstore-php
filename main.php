@@ -55,7 +55,7 @@ function logBookAddition($title, $author, $genre, $price) {
     $time = date('Y-m-d H:i:s');
     $ip_address = $_SERVER['REMOTE_ADDR'];
     $user_agent = $_SERVER['HTTP_USER_AGENT'];
-    $log_entry = "[$time] IP: $ip_address | UA: $user_agent | Added book: \"$title\" ($author, $genre, $price)\n";
+    $log_entry = "\n[$time]\n IP: $ip_address |\n UA: $user_agent |\n Added book: \"$title\" \n($author, $genre, $price)\n";
     
     // Append to the log file
     file_put_contents('bookstore_log.txt', $log_entry, FILE_APPEND);
