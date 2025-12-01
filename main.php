@@ -1,25 +1,54 @@
 <?php
-$books = [];
+$GLOBALS['books'] = [];
 
 // I put one initial book
 $initialbook = [
     "title" => "Round Six",
     "author" => "Gi-hun Seong",
-    "genre" => "Science Fiction",
+    "genre" => "Action and Adventure",
     "price" => 8
 ];
-array_push($books, $initialbook);
+array_push($GLOBALS['books'], $initialbook);
 
 // Function for applying 10 percent of discount in science fiction books
-function applyDiscount(&$allbooks)
-{
+function applyDiscount(&$allbooks){
+    $idx = count($GLOBALS['books']) - 1;
+
+    // Logic for adding discount to the last one (after I saw on the requirements that we need a loop)
+    // For me, it makes more sense to apply discount to every new book, not to all every time
+
+    // if ($GLOBALS['books'][$idx]['genre'] === "Science Fiction") {
+    //     $GLOBALS['books'][$idx]["price"] = $GLOBALS['books'][$idx]["price"] * 0.9;
+    // }
+
+    // Loop through all books, check the genre and change the price
     foreach ($allbooks as &$book) {
-        if ($book["genre"] === "Science Fiction") {
-            $book["price"] = $book["price"] * 0.9;
+        if ($book['genre'] === 'Science Fiction') {
+            $book['price'] = $book['price'] * 0.9;
         }
     }
 }
-// Call it for the first time
+
+function showBooks($books){
+    if (!empty($books)) {
+        foreach ($books as $book) {
+            echo "<tr>
+  <td style='padding:8px; border-bottom:1px solid #eee;'>{$book['title']}</td>
+  <td style='padding:8px; border-bottom:1px solid #eee;'>{$book['author']}</td>
+  <td style='padding:8px; border-bottom:1px solid #eee;'>{$book['genre']}</td>
+  <td style='padding:8px; border-bottom:1px solid #eee; text-align:right;'>\${$book['price']}</td>
+</tr>";
+        }
+    }
+}
+
+function totalPrice(&$allbooks){
+    $total = 0;
+    foreach($allbooks as $book){
+        $total += $book['price'];
+    }
+    echo $total;
+}
 
 // If server call post method, then:
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -30,32 +59,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $author = trim(htmlspecialchars($_POST['author']));
     $genre = trim(htmlspecialchars($_POST['genre']));
     $price = trim(htmlspecialchars($_POST['price']));
+    if ($title == "" | $author == "" | $genre == "") {
+        echo "One or more fields are empty! Please submit again without empty fields.";
+    }
 
     // Putting every data into the books array, so then we can iterate over
     // after to show it
-    array_push($books, ["title" => $title, "author" => $author, "genre" => $genre, "price" => $price]);
+    array_push($GLOBALS['books'], ["title" => $title, "author" => $author, "genre" => $genre, "price" => $price]);
     // Apply discount function call
-    applyDiscount($books);
-    print_r($books);
-
-    // Logic for checking if array has something
-    function showBooks($books){
-        if (!empty($books)) {
-            foreach ($books as $book) {
-                echo     "<tr>
-      <td style='padding:8px; border-bottom:1px solid #eee;'>{$book['title']}</td>
-      <td style='padding:8px; border-bottom:1px solid #eee;'>{$book['author']}</td>
-      <td style='padding:8px; border-bottom:1px solid #eee;'>{$book['genre']}</td>
-      <td style='padding:8px; border-bottom:1px solid #eee; text-align:right;'>\${$book['price']}</td>
-    </tr>";
-            }
-        }
-    }
-
-
-} else {
-    // For other type of requests
-    echo "Very bad request :(";
+    applyDiscount($GLOBALS['books']);
 }
 ?>
 
@@ -70,6 +82,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <h1>Form Submission</h1>
+
+    <?php
+    // Change the timezone to Vancouver :)
+    date_default_timezone_set("America/Vancouver");
+    // Show time
+    $time = date('Y-m-d H:i');
+    // Get IP Address and User Agent
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    ?>
+    <!-- Show to user -->
+    <p>
+      Request time: <?php echo htmlspecialchars($time); ?><br>
+      IP: <?php echo htmlspecialchars($ip_address); ?><br>
+      User agent: <?php echo htmlspecialchars($user_agent); ?>
+    </p>
+
     <form action="http://localhost/online-bookstore-php/main.php" method="POST">
         <!-- Title -->
         <label for="title">Title:</label>
@@ -106,11 +135,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </tr>
         </thead>
         <tbody>
-            <?php 
-                showBooks($books);
+            <?php
+            // Call the function for show books
+            showBooks($GLOBALS['books']);
             ?>
         </tbody>
     </table>
+    <p>
+    <?php 
+    // Call the function for price calculation
+    totalPrice($GLOBALS['books']);
+    ?></p>
 
 </body>
 
