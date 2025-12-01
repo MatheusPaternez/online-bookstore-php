@@ -1,0 +1,1 @@
+[2025-12-01 20:48:32] IP: ::1 | UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 OPR/124.0.0.0 | Added book: "Peaky Blinders" (Tommy Shelby, Science Fiction, 20)

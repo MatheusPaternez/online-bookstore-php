@@ -50,6 +50,17 @@ function totalPrice(&$allbooks){
     echo $total;
 }
 
+// Function to log book into the file
+function logBookAddition($title, $author, $genre, $price) {
+    $time = date('Y-m-d H:i:s');
+    $ip_address = $_SERVER['REMOTE_ADDR'];
+    $user_agent = $_SERVER['HTTP_USER_AGENT'];
+    $log_entry = "[$time] IP: $ip_address | UA: $user_agent | Added book: \"$title\" ($author, $genre, $price)\n";
+    
+    // Append to the log file
+    file_put_contents('bookstore_log.txt', $log_entry, FILE_APPEND);
+}
+
 // If server call post method, then:
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Storing form data into variables, used trim for avoiding
@@ -59,15 +70,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $author = trim(htmlspecialchars($_POST['author']));
     $genre = trim(htmlspecialchars($_POST['genre']));
     $price = trim(htmlspecialchars($_POST['price']));
+    
     if ($title == "" | $author == "" | $genre == "") {
         echo "One or more fields are empty! Please submit again without empty fields.";
+    } else {
+        // Putting every data into the books array
+        array_push($GLOBALS['books'], ["title" => $title, "author" => $author, "genre" => $genre, "price" => $price]);
+        
+        // Log the addition of the new book
+        logBookAddition($title, $author, $genre, $price);
+        
+        // Apply discount function call
+        applyDiscount($GLOBALS['books']);
     }
-
-    // Putting every data into the books array, so then we can iterate over
-    // after to show it
-    array_push($GLOBALS['books'], ["title" => $title, "author" => $author, "genre" => $genre, "price" => $price]);
-    // Apply discount function call
-    applyDiscount($GLOBALS['books']);
 }
 ?>
 
