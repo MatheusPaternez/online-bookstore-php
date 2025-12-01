@@ -78,11 +78,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Online Bookstore</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <div class="container">
     <h1>Form Submission</h1>
-
     <?php
     // Change the timezone to Vancouver :)
     date_default_timezone_set("America/Vancouver");
@@ -93,13 +94,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user_agent = $_SERVER['HTTP_USER_AGENT'];
     ?>
     <!-- Show to user -->
-    <p>
+    <p class="meta">
       Request time: <?php echo htmlspecialchars($time); ?><br>
       IP: <?php echo htmlspecialchars($ip_address); ?><br>
       User agent: <?php echo htmlspecialchars($user_agent); ?>
     </p>
 
-    <form action="http://localhost/online-bookstore-php/main.php" method="POST">
+    <form class="book-form" action="http://localhost/online-bookstore-php/main.php" method="POST">
         <!-- Title -->
         <label for="title">Title:</label>
         <input type="text" placeholder="Insert the title" id="title" name="title" required /><br><br>
@@ -116,22 +117,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="submit" value="Submit via POST">
     </form>
 
-    <table id="books-table" aria-label="Books list" style="width:70%; margin: auto; border-collapse:collapse;">
+    <table id="books-table" class="books-table" aria-label="Books list">
         <caption>Books</caption>
         <thead>
             <tr>
-                <th scope="col" style="text-align:left; padding:8px; border-bottom:1px solid #ccc;">
-                    Title
-                </th>
-                <th scope="col" style="text-align:left; padding:8px; border-bottom:1px solid #ccc;">
-                    Author
-                </th>
-                <th scope="col" style="text-align:left; padding:8px; border-bottom:1px solid #ccc;">
-                    Genre
-                </th>
-                <th scope="col" style="text-align:right; padding:8px; border-bottom:1px solid #ccc;">
-                    Price
-                </th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Genre</th>
+                <th scope="col" style="text-align:right;">Price</th>
             </tr>
         </thead>
         <tbody>
@@ -141,12 +134,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             ?>
         </tbody>
     </table>
-    <p>
+
+    <p class="total-price"> Total Price: 
     <?php 
     // Call the function for price calculation
     totalPrice($GLOBALS['books']);
     ?></p>
 
+    </div>
 </body>
 
 </html>

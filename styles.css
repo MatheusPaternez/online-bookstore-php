@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Form styles */
+.book-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.book-form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.book-form input[type="text"],
+.book-form input[type="number"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.book-form input[type="submit"] {
+    background-color: #5cb85c;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.book-form input[type="submit"]:hover {
+    background-color: #4cae4c;
+}
+
+/* Table styles */
+.books-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.books-table th,
+.books-table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.books-table th {
+    background-color: #f2f2f2;
+}
+
+.total-price {
+    font-size: 1.2em;
+    margin-top: 20px;
+    font-weight: bold;
+}
