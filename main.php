@@ -167,6 +167,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     totalPrice($GLOBALS['books']);
     ?></p>
 
+    <!-- Display bookstore_log.txt -->
+    <section class="activity-log">
+        <h2>Activity Log</h2>
+        <?php
+        // Uses DIR to have the path for the file
+        $logfile = __DIR__ . '/bookstore_log.txt';
+        if (file_exists($logfile)) {
+            $log_contents = file_get_contents($logfile);
+            // If log content doesn't exist, it will return false
+            if ($log_contents === false) {
+                echo "<p>No log entries yet.</p>";
+            } else {
+                echo '<p style="white-space:pre-wrap; font-size: 14px; background:#f8f8f8; padding:12px; border-radius:6px;">' . htmlspecialchars($log_contents) . '</p>';
+            }
+        } else {
+            echo "<p>Log file not found or unreadable.</p>";
+        }
+        ?>
+    </section>
+
     </div>
 </body>
 
