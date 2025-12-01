@@ -29,6 +29,16 @@ function applyDiscount(&$allbooks){
     }
 }
 
+// Function for applying 5 percent of discount in fantasy books
+function applyFantasyDiscount(&$allbooks){
+    // Loop through all books, check the genre and change the price
+    foreach ($allbooks as &$book) {
+        if ($book['genre'] === 'Fantasy') {
+            $book['price'] = $book['price'] * 0.95;
+        }
+    }
+}
+
 function showBooks($books){
     if (!empty($books)) {
         foreach ($books as $book) {
@@ -82,6 +92,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         
         // Apply discount function call
         applyDiscount($GLOBALS['books']);
+        applyFantasyDiscount($GLOBALS['books']);
     }
 }
 ?>

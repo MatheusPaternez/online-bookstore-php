@@ -10,3 +10,9 @@
  UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 OPR/124.0.0.0 |
  Added book: "Peaky Blinders" 
 (Tommy Shelby, ON A GATHERING STORM COMES A TALL HANDSOME MAN IN A DUSTY BLACK COAT WITH A RED RIGHT HAND, 100)
+
+[2025-12-01 21:42:18]
+ IP: ::1 |
+ UA: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36 OPR/124.0.0.0 |
+ Added book: "Alice in Borderlands" 
+(Some Japanese men, Fantasy, 10)
